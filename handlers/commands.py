@@ -8,7 +8,8 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 async def start(message: types.Message):
     await bot.send_message(chat_id=message.from_user.id,
-                           text=f'Привет! {message.from_user.first_name}')
+                           text=f'Привет! {message.from_user.first_name}\n\n'
+                           f'Твой телеграм ID - {message.from_user.id}')
 
 
 async def mem(message: types.Message):
