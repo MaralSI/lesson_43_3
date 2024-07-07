@@ -2,9 +2,11 @@ from aiogram import types
 from config import dp
 from aiogram.utils import executor
 import logging
-from handlers import commands, echo
+from handlers import commands, echo, quiz
 
 commands.register_commands(dp)
+quiz.register_quiz(dp)
+
 echo.register_echo(dp)
 
 
