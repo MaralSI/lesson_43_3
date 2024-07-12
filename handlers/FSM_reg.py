@@ -3,12 +3,11 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-import buttons
 
 class RegisterUser(StatesGroup):
     fullname = State()
     age = State()
-    address = State()
+    adress = State()
     phone = State()
     email = State()
     photo = State()
@@ -17,7 +16,7 @@ class RegisterUser(StatesGroup):
 
 async def fsm_start(message: types.Message):
     await RegisterUser.fullname.set()
-    await message.answer(text="Введите ФИО:", reply_markup=buttons.cancel)
+    await message.answer(text="Введите ФИО:")
 
 
 async def load_name(message: types.Message, state: FSMContext):
@@ -36,9 +35,9 @@ async def load_age(message: types.Message, state: FSMContext):
     await message.answer(text='Введите свой адрес:')
 
 
-async def load_address(message: types.Message, state: FSMContext):
+async def load_adress(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['address'] = message.text
+        data['adress'] = message.text
 
     await RegisterUser.next()
     await message.answer(text='Введите свой номер телефона:')
@@ -73,40 +72,30 @@ async def load_photo(message: types.Message, state: FSMContext):
     await message.answer_photo(photo=data['photo'],
                                caption=f"Фио - {data['fullname']}\n"
                                        f"Возраст - {data['age']}\n"
-                                       f"Адрес - {data['address']}\n"
+                                       f"Адрес - {data['adress']}\n"
                                        f"Номер - {data['phone']}\n"
-                                       f"Почта - {data['email']}\n\n"
-                                       f'<b>Верные ли данные ?<b>',
-                               reply_markup=keyboard, parse_mode=types.ParseMode.HTML)
+                                       f"Почта - {data['email']}",
+                               reply_markup=keyboard)
 
 
 async def submit(callback_query: types.CallbackQuery, state: FSMContext):
     if callback_query.data == 'confirm_yes':
-        await callback_query.message.answer('Отлично! Регистрация пройдена.', reply_markup=None)
+        await callback_query.message.answer('Отлично! Регистрация пройдена.')
         await state.finish()
     elif callback_query.data == 'confirm_no':
-        await callback_query.message.answer('Отменено!', reply_markup=None)
+        await callback_query.message.answer('Отменено!')
         await state.finish()
 
     else:
-        await callback_query.message.answer(text='Нажмите на кнопку!', reply_markup=buttons.start_buttons)
+        await callback_query.message.answer(text='Нажмите на кнопку!')
 
-async def cancel_fsm(message: types.Message, state: FSMContext):
-    current_state = await state.get_state()
-    if current_state is not None:
-        await state.finish()
-        await message.answer(text='Отменено')
 
-# Finite State Machine
 def register_fsm_for_user(dp: Dispatcher):
-    dp.register_message_handler(cancel_fsm, Text(equals='Отмена',
-                                                 ignore_case=True), state='*')
     dp.register_message_handler(fsm_start, commands=['registration'])
     dp.register_message_handler(load_name, state=RegisterUser.fullname)
     dp.register_message_handler(load_age, state=RegisterUser.age)
-    dp.register_message_handler(load_address, state=RegisterUser.address)
+    dp.register_message_handler(load_adress, state=RegisterUser.adress)
     dp.register_message_handler(load_phone, state=RegisterUser.phone)
     dp.register_message_handler(load_email, state=RegisterUser.email)
     dp.register_message_handler(load_photo, state=RegisterUser.photo, content_types=['photo'])
     dp.register_message_handler(submit, state=RegisterUser.submit)
-
