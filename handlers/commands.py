@@ -14,7 +14,9 @@ async def start(message: types.Message):
 
 async def mem(message: types.Message):
     button_game = InlineKeyboardMarkup(row_width=1)
-    button_game.add(InlineKeyboardButton("Посмотреть", callback_data='button_game'))
+    button_game.add(InlineKeyboardButton("Посмотреть", callback_data='button_game'),
+                    InlineKeyboardButton("Следующая", callback_data='null'),
+                    InlineKeyboardButton('Null', callback_data='Null_1'))
     await message.answer("Если хотите рандомное фото, нажмите на кнопку ниже:",
                          reply_markup=button_game)
 
@@ -25,6 +27,8 @@ async def send_mem(call: types.CallbackQuery):
 
     await bot.send_photo(chat_id=call.from_user.id,
                         photo=InputFile(random_photo))
+
+    await bot.answer_photo(photo=InputFile(random_photo))
 
 
 def register_commands(dp: Dispatcher):
