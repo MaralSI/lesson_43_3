@@ -71,7 +71,6 @@ async def load_photo(message: types.Message, state: FSMContext):
                                        f"<b>Верные ли данные ?</b>",
                                reply_markup=keyboard, parse_mode=types.ParseMode.HTML)
 
-
 async def submit(message: types.Message, state: FSMContext):
     if message.text == 'Да':
         async with state.proxy() as data:

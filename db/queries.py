@@ -1,6 +1,6 @@
 
 CREATE_TABLE_STORE = """
-    CREATE TABLE IF NOT EXISTS online_sto
+    CREATE TABLE IF NOT EXISTS online_store
     (id INTERGER PRIMARY KEY AUTOINTEGER,
     name_product VARCHAR(255),
     size VACHAR(255)
@@ -12,6 +12,6 @@ CREATE_TABLE_STORE = """
 
 
 INSERT_STORE = """
-    INSERT_INFO online_store(name_product, size, price, productid, photo)
-    VALUES(?, ?, ?, ?, ?)
+    INSERT_INFO online_store(name_product, size, price, product_id, category, info_product, photo)
+    VALUES(?, ?, ?, ?, ?, ?, ?)
 """
