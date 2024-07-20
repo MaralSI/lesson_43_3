@@ -13,6 +13,8 @@ class store(StatesGroup):
     size = State()
     price = State()
     productid = State()
+    category = State()
+    infoproduct = State()
     photo = State()
     submit = State()
 
@@ -51,8 +53,24 @@ async def load_productid(message: types.Message, state: FSMContext):
         data['productid'] = message.text
 
     await store.next()
+    await message.answer('Напишите категорию товара:')
+
+async def load_category(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['category'] = message.text
+
+    await store.next()
+    await message.answer('Напишите информацию о товаре:')
+
+
+async def load_infoproduct(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['infoproduct'] = message.text
+
+    await store.next()
     kb = types.ReplyKeyboardRemove()
     await message.answer(text='Отправьте фотку товара:', reply_markup=kb)
+
 
 
 async def load_photo(message: types.Message, state: FSMContext):
@@ -67,9 +85,12 @@ async def load_photo(message: types.Message, state: FSMContext):
                                caption=f"Название - {data['name_product']}\n"
                                        f"Размер - {data['size']}\n"
                                        f"Цена - {data['price']}\n"
-                                       f"Артикул - {data['productid']}\n\n"
+                                       f"Артикул - {data['productid']}\n"
+                                       f"Категория - {data['category']}\n"
+                                       f"Информация о товаре - {data['infoproduct']}\n\n"
                                        f"<b>Верные ли данные ?</b>",
                                reply_markup=keyboard, parse_mode=types.ParseMode.HTML)
+
 
 async def submit(message: types.Message, state: FSMContext):
     if message.text == 'Да':
@@ -81,6 +102,13 @@ async def submit(message: types.Message, state: FSMContext):
                 productid=data['productid'],
                 photo=data['photo']
             )
+
+            await main_db.sql_insert_detail_products(
+                productid=data['productid'],
+                category=data['category'],
+                infoproduct=data['infoproduct']
+            )
+
             await message.answer('Отлично! Регистрация пройдена.', reply_markup=buttons.start_buttons)
             await state.finish()
     elif message.text == 'Нет':
@@ -107,5 +135,7 @@ def register_fsm_store(dp: Dispatcher):
     dp.register_message_handler(load_size, state=store.size)
     dp.register_message_handler(load_price, state=store.price)
     dp.register_message_handler(load_productid, state=store.productid)
+    dp.register_message_handler(load_category, state=store.category)
+    dp.register_message_handler(load_infoproduct, state=store.infoproduct)
     dp.register_message_handler(load_photo, state=store.photo, content_types=['photo'])
     dp.register_message_handler(submit, state=store.submit)

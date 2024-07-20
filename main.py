@@ -1,10 +1,10 @@
-from aiogram import types
 from config import dp, Admin, bot
 from aiogram.utils import executor
 import logging
-from handlers import commands, echo, quiz,FSM_reg, FSM_store
+from handlers import commands, echo, quiz, FSM_reg, FSM_store, notification, send_products, webapp, admin_group
 import buttons
 from db import main_db
+
 
 async def on_startup(_):
     for i in Admin:
@@ -16,16 +16,21 @@ async def on_startup(_):
 
 async def on_shutdown(_):
     for i in Admin:
-        await bot.send_message(chat_id=i, text='Bot finished')
+        await bot.send_message(chat_id=i, text='Бот выключен!')
 
 
 commands.register_commands(dp)
 quiz.register_quiz(dp)
 FSM_reg.register_fsm_for_user(dp)
 FSM_store.register_fsm_store(dp)
+notification.register_notification(dp)
+send_products.register_send_products(dp)
+webapp.register_webapp(dp)
 
-echo.register_echo(dp)
+admin_group.register_admin_group(dp)
 
+# Эхо функция - вызывать самым последним
+# echo.register_echo(dp)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
