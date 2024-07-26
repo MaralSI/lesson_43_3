@@ -3,9 +3,11 @@ from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import (InlineKeyboardMarkup, InlineKeyboardButton,
-                           KeyboardButton, ReplyKeyboardMarkup)
+                            KeyboardButton, ReplyKeyboardMarkup)
 import buttons
 from db import main_db
+from Google_Sheets.sheets import update_google_sheet_products 
+
 
 
 class store(StatesGroup):
@@ -82,14 +84,14 @@ async def load_photo(message: types.Message, state: FSMContext):
 
     await store.next()
     await message.answer_photo(photo=data['photo'],
-                               caption=f"Название - {data['name_product']}\n"
-                                       f"Размер - {data['size']}\n"
-                                       f"Цена - {data['price']}\n"
-                                       f"Артикул - {data['productid']}\n"
-                                       f"Категория - {data['category']}\n"
-                                       f"Информация о товаре - {data['infoproduct']}\n\n"
-                                       f"<b>Верные ли данные ?</b>",
-                               reply_markup=keyboard, parse_mode=types.ParseMode.HTML)
+                                caption=f"Название - {data['name_product']}\n"
+                                        f"Размер - {data['size']}\n"
+                                        f"Цена - {data['price']}\n"
+                                        f"Артикул - {data['productid']}\n"
+                                        f"Категория - {data['category']}\n"
+                                        f"Информация о товаре - {data['infoproduct']}\n\n"
+                                        f"<b>Верные ли данные ?</b>",
+                                reply_markup=keyboard, parse_mode=types.ParseMode.HTML)
 
 
 async def submit(message: types.Message, state: FSMContext):
@@ -99,15 +101,23 @@ async def submit(message: types.Message, state: FSMContext):
                 name_product=data['name_product'],
                 size=data['size'],
                 price=data['price'],
-                productid=data['productid'],
+                product_id=data['product_id'],
                 photo=data['photo']
             )
 
             await main_db.sql_insert_detail_products(
-                productid=data['productid'],
+                product_id=data['product_id'],
                 category=data['category'],
-                infoproduct=data['infoproduct']
+                info_product=data['info_product']
             )
+                        
+            update_google_sheet_products(name_product = data['name_product'], 
+                                            size = data['size'],
+                                            price = data['size'], 
+                                            product_id = data['product_id'],
+                                            category = data['category'], 
+                                            info_product = data['info_product'])
+
 
             await message.answer('Отлично! Регистрация пройдена.', reply_markup=buttons.start_buttons)
             await state.finish()
@@ -129,7 +139,7 @@ async def cancel_fsm(message: types.Message, state: FSMContext):
 # Finite State Machine
 def register_fsm_store(dp: Dispatcher):
     dp.register_message_handler(cancel_fsm, Text(equals='Отмена',
-                                                 ignore_case=True), state='*')
+                                                ignore_case=True), state='*')
     dp.register_message_handler(fsm_start, commands=['store'])
     dp.register_message_handler(load_name_product, state=store.name_product)
     dp.register_message_handler(load_size, state=store.size)

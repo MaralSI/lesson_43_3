@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "lesson-43-2",c:\Users\Sagynalieva\Downloads\Python\PycharmProjects\pythonProject\Month 3\lesson-43-2-bd34254a9b21.json
+  "private_key_id": "bd34254a9b2181f68bd9bdfec9c971ed3b0a3c44",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDGHki6I7Ku/BSk\nQrfoK5nW/dnTm1satZXLWf3OgWvhXMZXMYMxtc6bRfn6KnybNtcnp9T0z+O37jSE\nMF24C8UgERyHJE3DopL4TNgnYiqI9CAEUjJkNz3lWeICUIKmQuM1o8Fjtszw36XW\nZzPdbvVUaxP88zaRFcTq0EAQ/74zsy+3ICxlZvjiCx8xFaGeGJcSbK7eVMjiWHF/\ni3+2wIcNb0lshZjTiiiycxK61qVYkuRzUtnGdmxBEjXQ3NUFzMiFu5FRIn2g2Y/1\n97oqR4FyWwc/pr3Q04LfFqm5if6iEMXoo2HjCeYQfGi3GZcWogyMotaLkkzv11To\nZ0c7RBQ/AgMBAAECggEAAcfc5yYR/gZQWIQP5FRjG25r5r3WyaAPM6w1rNrFf9mP\nH+7zmxe4vrw0ju+vKLOLUdw0mTIMC/0Cnw1SrsTAUHHcQw9dpDx1dSnE/Sfax69Z\nmhk60GM6DpWfvF3sVOxYpsu3ujc26Hcel6OVDV6+VW0wvNuT4uy7VTUx3VVABSBe\nt3mfkJ0me+ry/b3LU7Vz9wedFIkaS0+zn4Bb3xWI/xDF/QhFq7PlTqkWrCalCh/E\n8xDdShkc2uDaMWhCSGvgZLc1AFasNCOjJQJvJBJv1w/GZVwyPvW3jCdzogoXC+kB\nJ/IQ7I6hme8QAnnVP/AO8/NB96Hn2LlOPFGVtuDdpQKBgQD8zvNHcTI9f0DLlnUt\ntlXNI2n535CCQ3Acu7ijTxs6AouCTS5LLG3TraTIAb9tF8Ay55YCquidEnBxYLfY\n6aNf10Eoz8dDUKSbCbzv2N7TtgOiG9dlkdDnaU8+7zwNWGFr585MTY9IyZcYpKfk\nFwY+w2i17iYp77uFDlmFDf47SwKBgQDInpTLEKBroehs8eeHBrBEZmrXT8NcJXbo\nDWYM6Tgu0ZM72NkDipFOVJ+MjnWQhypaXFO7PMtr23ASaEUuzoR24vKsHPZDTeK+\nUUM/cDs0iG4JW5EgpZcprTbWksv8WILr+eD+6ETr4tHUMjCIYx4PgKeoIqHkAB1s\nTMSck4leXQKBgQDi2PS1254ATsqepIC7JwzwyWFT5UcvjEHyloPEjrxYnmX+4zCy\nJcjbE8pz6hWSV6iQRPx3olKedyhMpEP0MRn3axi9/UvJXHiH4gIWmlzATmgOM7th\nGaoBrJ5+U39oXjD0+YlFMKds4e9iHoXEhuCEuyWfcnXuVX7HkyvC196T5wKBgDcm\nYQDxsSflel94oI0d6ZbkELrf0nSiV+2ywTsLYcZ9Flx9YCr5DLjbyoB5KRhyD9KH\nTv1J2SHtUQG+aEZVv1RvTwbBb3FRF+P5suLdl2j5mEY6RcsTulpao5iZAjp8moEE\nUDXC5C90SvpqUa0skjbwxyYRXy+uWGhNMj9Yz4qBAoGADRLG58JPa740s/3Fdaw/\nSg3uAEnUOmiLB4Zv68EYJWfa3r/d0wVoE+2nVS9384xCxO3ISqu8BtgFl6Dg4Rz3\nmWfJ9DnQdh/xqqN2y+bsAMgnpifa4j0xC0g3P5wN+5q7ZV7Y1JDJVrHm+bzk0UPz\n20pZq6oA6V/Jc6oUOoJm338=\n-----END PRIVATE KEY-----\n",
+  "client_email": "lesson-43-2@lesson-43-2.iam.gserviceaccount.com",
+  "client_id": "106653574256993929989",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/lesson-43-2%40lesson-43-2.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
