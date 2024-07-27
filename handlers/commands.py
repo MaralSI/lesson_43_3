@@ -10,9 +10,12 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 async def start(message: types.Message):
     await bot.send_message(chat_id=message.from_user.id,
                            text=f'Привет! {message.from_user.first_name}\n\n'
-                                f'Твой telegram ID - {message.from_user.id}')
+                                f'Я-твой помощник - {message.from_user.id}')
 
-
+async def info(message: types.Message):
+    await bot.send_message(chat_id=message.from_user.id,
+                           text=f'Информация! {message.from_user.first_name}\n\n'
+                                f'я помогу выбрать лучший товар- {message.from_user.id}')
 
 async def mem(message: types.Message):
     button_game = InlineKeyboardMarkup(row_width=1)
@@ -40,7 +43,7 @@ async def webapp(message: types.Message):
 
 def register_commands(dp: Dispatcher):
     dp.register_message_handler(start, commands=['start', 'начало'])
+    dp.register_message_handler(info, commands=['info', 'информация'])
     dp.register_message_handler(mem, commands=['mem', 'мем'])
     dp.register_callback_query_handler(send_mem, text='button_game')
-
     dp.register_message_handler(webapp, commands=['geeks_online'])

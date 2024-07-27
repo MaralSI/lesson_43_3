@@ -105,7 +105,7 @@ async def cancel_fsm(message: types.Message, state: FSMContext):
 def register_fsm_for_user(dp: Dispatcher):
     dp.register_message_handler(cancel_fsm, Text(equals='Отмена',
                                                  ignore_case=True), state='*')
-    dp.register_message_handler(fsm_start, commands=['registration'])
+    dp.register_message_handler(fsm_start, commands=['registragtion'])
     dp.register_message_handler(load_name, state=RegisterUser.fullname)
     dp.register_message_handler(load_age, state=RegisterUser.age)
     dp.register_message_handler(load_adress, state=RegisterUser.adress)

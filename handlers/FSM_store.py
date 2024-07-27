@@ -8,8 +8,6 @@ import buttons
 from db import main_db
 from Google_Sheets.sheets import update_google_sheet_products 
 
-
-
 class store(StatesGroup):
     name_product = State()
     size = State()
@@ -50,9 +48,9 @@ async def load_price(message: types.Message, state: FSMContext):
     await message.answer(text='Введите артикул: ')
 
 
-async def load_productid(message: types.Message, state: FSMContext):
+async def load_product_id(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['productid'] = message.text
+        data['product_id'] = message.text
 
     await store.next()
     await message.answer('Напишите категорию товара:')
@@ -65,9 +63,9 @@ async def load_category(message: types.Message, state: FSMContext):
     await message.answer('Напишите информацию о товаре:')
 
 
-async def load_infoproduct(message: types.Message, state: FSMContext):
+async def load_info_product(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['infoproduct'] = message.text
+        data['info_product'] = message.text
 
     await store.next()
     kb = types.ReplyKeyboardRemove()
@@ -144,8 +142,8 @@ def register_fsm_store(dp: Dispatcher):
     dp.register_message_handler(load_name_product, state=store.name_product)
     dp.register_message_handler(load_size, state=store.size)
     dp.register_message_handler(load_price, state=store.price)
-    dp.register_message_handler(load_productid, state=store.productid)
+    dp.register_message_handler(load_product_id, state=store.productid)
     dp.register_message_handler(load_category, state=store.category)
-    dp.register_message_handler(load_infoproduct, state=store.infoproduct)
+    dp.register_message_handler(load_info_product, state=store.infoproduct)
     dp.register_message_handler(load_photo, state=store.photo, content_types=['photo'])
     dp.register_message_handler(submit, state=store.submit)

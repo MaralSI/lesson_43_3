@@ -2,9 +2,9 @@ from aiogram import Dispatcher, Bot # type: ignore
 from decouple import config # type: ignore
 from aiogram.contrib.fsm_storage.memory import MemoryStorage # type: ignore
 
-Admin = [995712956, ]
+Admin = [7495645497, ]
 
 TOKEN = config('TOKEN')
 bot = Bot(token=TOKEN)
-storege = MemoryStorage()
-dp = Dispatcher(bot=bot, storage=storege)
+storage = MemoryStorage()
+dp = Dispatcher(bot=bot, storage=storage)

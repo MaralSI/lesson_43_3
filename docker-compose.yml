@@ -3,14 +3,13 @@ version: '3.8'
 services:
   bot:
     build:
-    container_name: lesson_43_2
+    container_name: maralsi_test_43_2
     volume:
       - . :/app
       - db_data:/app/db_data
-    command: python main.python
-    -network_mode: 'host'
+    command: python main.py
+    network_mode: 'host'
 
 volumes:
   db_data:
-
 

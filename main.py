@@ -1,10 +1,11 @@
 from config import dp, Admin, bot
 from aiogram.utils import executor
 import logging
-from handlers import commands, echo, quiz, FSM_reg, FSM_store, notification, send_products, webapp, admin_group
+from handlers import commands, echo, quiz, FSM_reg, FSM_store, notification, send_products, webapp, admin_group, FMS_list_products, FMS_order
 import buttons
 from db import main_db
 from Google_Sheets import sheets
+
 
 
 async def on_startup(_):
@@ -24,6 +25,9 @@ commands.register_commands(dp)
 quiz.register_quiz(dp)
 FSM_reg.register_fsm_for_user(dp)
 FSM_store.register_fsm_store(dp)
+FMS_list_products.register_fsm_for_user(dp)
+FMS_order.register_fsm_for_user(dp)
+
 notification.register_notification(dp)
 send_products.register_send_products(dp)
 webapp.register_webapp(dp)
